@@ -6,3 +6,9 @@ services:
       - "80:80"
     env_file:
       - env_config
+    dns:
+      - 1.1.1.1
+      - 8.8.4.4
+    dns_search:
+      - dc1.example.com
+      - dc2.example.com

@@ -19,7 +19,9 @@ COPY app.py .
 
 # Run the script every five minutes after the hour using cron
 # RUN mkdir /etc/cron.d
-RUN echo "*/5 * * * * /usr/local/bin/python /app/app.py" > /etc/cron.d/script-cron
+# RUN echo "*/5 * * * * /usr/local/bin/python /app/app.py" > /etc/cron.d/script-cron
+RUN touch /var/log/script-cron.log
+RUN echo "*/5 * * * * /usr/local/bin/python /app/app.py" > /etc/cron.d/script-cron >> /var/log/script-cron.log 2>&1
 
 RUN chmod 0644 /etc/cron.d/script-cron
 

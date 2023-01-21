@@ -1,23 +1,23 @@
 # your openweather api key
-OPENWEATHER_API_KEY=your_api_key_here
+OPENWEATHER_API_KEY=7892ec3590540e04028d85a30108c1f1
 
 # location latitude
-LATITUDE=latitude_here
+LATITUDE=6.515218
 
 #location longitude
-LONGITUDE=longitude_here
+LONGITUDE=3.389464
 
 # your influx db database ipaddress(v1.x supported for now)
-INFLUXDBHOST=ip_address_here
+INFLUXDBHOST=127.0.0.1
 
 # your influx db username
-INFLUXDBUSER=influx_username
+INFLUXDBUSER=root
 
 # your influx db password
-INFLUXDBPWD=influx_password
+INFLUXDBPWD=root
 
 # your influx db database name
-INFLUXDBNAME=influx_database_name
+INFLUXDBNAME=WeatherData
 
 # the fields you want to record
 FIELDS_TO_RECORD=temperature,weather_description,sunrise,sunset,pressure

@@ -1,0 +1,28 @@
+name: Build and Push Docker Image
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Run build
+      run: |
+        docker build -t qweather:${{ github.sha }} .
+
+    - name: Check build status
+      run: echo "Build status: $?"
+      id: check-status
+
+    - name: Build and push Docker image
+      if: steps.check-status.outputs.status == '0'
+      run: |
+        echo "${{ secrets.DOCKER_TOKEN }}" | docker login docker.io -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+        docker push qweather:${{ github.sha }}

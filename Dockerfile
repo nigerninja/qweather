@@ -4,6 +4,9 @@ FROM python:3.9-slim-buster
 # Run an update
 RUN apt-get update
 
+# Install cron
+RUN apt-get install -y cron
+
 # Set the working directory in the container
 WORKDIR /app
 
@@ -15,7 +18,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY app.py .
 
 # Run the script every five minutes after the hour using cron
-RUN mkdir /etc/cron.d
+# RUN mkdir /etc/cron.d
 RUN echo "*/5 * * * * /usr/local/bin/python /app/app.py" > /etc/cron.d/script-cron
 RUN chmod 0644 /etc/cron.d/script-cron
 

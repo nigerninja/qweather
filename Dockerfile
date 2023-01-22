@@ -24,8 +24,8 @@ COPY app.py .
 RUN touch /var/log/script-cron.log
 
 # RUN echo "*/5 * * * * root /usr/local/bin/python /app/app.py >> /var/log/script-cron.log 2>&1" >> /etc/cron.d/script-cron
-#RUN echo "*/5 * * * * root /usr/local/bin/python /app/app.py >> /var/log/script-cron.log 2>&1" >> /etc/cron.d/script-cron
-RUN echo "*/5 * * * * root /usr/local/bin/python /app/app.py >> /proc/1/fd/1 2>/proc/1/fd/2 /var/log/script-cron.log" >> /etc/cron.d/script-cron
+# RUN echo "*/5 * * * * root /usr/local/bin/python /app/app.py >> /proc/1/fd/1 2>/proc/1/fd/2 /var/log/script-cron.log" >> /etc/cron.d/script-cron
+RUN echo "*/5 * * * * root /usr/local/bin/python /app/app.py | tee -a /var/log/script-cron.log /proc/1/fd/1 2>/proc/1/fd/2" >> /etc/cron.d/script-cron
 
 
 RUN chmod 0644 /etc/cron.d/script-cron

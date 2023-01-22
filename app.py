@@ -47,12 +47,13 @@ def record_weather(api_key, latitude, longitude, fields_to_record, influx_client
                 record['fields']['pressure'] = weather_data['main']['pressure']
 
         # the print lines here only during development and replaced by the commented client writes when done
-        print(weather_data, '\n')
-        print(location_data, '\n')
+        #print(weather_data, '\n')
+        #print(location_data, '\n')
         print(record, '\n')
         
         # write the record to InfluxDB
         #influx_client.write_points([record])
+        print(f"Measurement taken at {date.today():%Y/%m/%d}")
     
     # check for errors
     except requests.exceptions.RequestException as e:

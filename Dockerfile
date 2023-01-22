@@ -21,7 +21,7 @@ COPY app.py .
 # RUN mkdir /etc/cron.d
 # RUN echo "*/5 * * * * /usr/local/bin/python /app/app.py" > /etc/cron.d/script-cron
 RUN touch /var/log/script-cron.log
-RUN echo "*/5 * * * * /usr/local/bin/python /app/app.py > /var/log/script-cron.log 2>&1" >> /etc/cron.d/script-cron
+RUN echo "*/5 * * * * root /usr/local/bin/python /app/app.py > /var/log/script-cron.log 2>&1" >> /etc/cron.d/script-cron
 
 RUN chmod 0644 /etc/cron.d/script-cron
 

@@ -2,7 +2,7 @@ import os
 import requests
 import json
 from influxdb import InfluxDBClient
-from datetime import date
+from datetime import datetime, timezone
 
 def record_weather(api_key, latitude, longitude, fields_to_record, influx_client):
     """
@@ -49,19 +49,19 @@ def record_weather(api_key, latitude, longitude, fields_to_record, influx_client
         # the print lines here only during development and replaced by the commented client writes when done
         #print(weather_data, '\n')
         #print(location_data, '\n')
-        print(record, '\n')
+        print(record)
         
         # write the record to InfluxDB
         #influx_client.write_points([record])
-        print(f"Measurement taken at {date.today():%Y/%m/%d}")
+        print(f"Measurement taken at {datetime.now().isoformat(timespec='seconds')}", '\n')
     
     # check for errors
     except requests.exceptions.RequestException as e:
-        print(f"Error while connecting: {e} at {date.today():%Y/%m/%d}")
+        print(f"Error while connecting: {e} at {datetime.now().isoformat(timespec='seconds')}")
     except InfluxDBClient as e:
-        print(f"Error while connecting: {e} at {date.today():%Y/%m/%d}")
+        print(f"Error while connecting: {e} at {datetime.now().isoformat(timespec='seconds')}")
     except Exception as e:
-        print(f"An error occurred: {e} at {date.today():%Y/%m/%d}")
+        print(f"An error occurred: {e} at {datetime.now().isoformat(timespec='seconds')}")
 
 if __name__ == '__main__':
     # retrieve the API key and location from the environment variables

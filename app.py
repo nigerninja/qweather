@@ -2,6 +2,7 @@ import os
 import requests
 import json
 from influxdb import InfluxDBClient
+from datetime import date
 
 def record_weather(api_key, latitude, longitude, fields_to_record, influx_client):
     """
@@ -55,11 +56,11 @@ def record_weather(api_key, latitude, longitude, fields_to_record, influx_client
     
     # check for errors
     except requests.exceptions.RequestException as e:
-        print(f"Error while connecting: {e}")
+        print(f"Error while connecting: {e} at {date.today():%Y/%m/%d}")
     except InfluxDBClient as e:
-        print(f"Error while connecting: {e}")
+        print(f"Error while connecting: {e} at {date.today():%Y/%m/%d}")
     except Exception as e:
-        print(f"An error occurred: {e}")
+        print(f"An error occurred: {e} at {date.today():%Y/%m/%d}")
 
 if __name__ == '__main__':
     # retrieve the API key and location from the environment variables
